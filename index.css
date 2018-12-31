@@ -5,6 +5,7 @@ html, body {
 .landing {
   height: 100vh;
   position: relative;
+  margin-bottom: 30px;
 }
 
 .imageContain {
@@ -13,10 +14,18 @@ html, body {
   left: 0;
   height: 100%;
   width: 100%;
-  background-image: url(./resources/08.jpg);
-  background-position: center;
+  background-image: url(./resources/14.jpg);
+  background-position: top;
   background-size: cover;
   z-index: 1;
+}
+
+.aboutProject {
+  cursor: pointer;
+  z-index: 3;
+  color: white;
+  font-weight: 300;
+  font-size: 16px;
 }
 
 .landingOverlay {
@@ -26,8 +35,8 @@ html, body {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgb(81,19,119);
-  background: linear-gradient(45deg, rgba(1,0,2,0.65) 0%, rgba(72,18,106,0.85) 84%, rgba(49,12,72,1) 100%);
+  background-image: linear-gradient(to right bottom, rgba(66, 66, 66, 0.9), rgba(103, 75, 105, 0.9), rgba(164, 72, 117, 0.8), rgba(222, 65, 93, 0.75), rgba(255, 87, 34, 1));
+
 }
 
 .topNav {
@@ -42,7 +51,7 @@ html, body {
 .menu {
   z-index: 5;
   position: relative;
-  width: 25px;
+  width: 22px;
 }
 
 .onTopLanding {
@@ -51,22 +60,27 @@ html, body {
 }
 
 .titleContainer {
-  position: absolute;
-  height: 100%;
+  height: calc(100% - 100px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 25px;
 }
 
 .landTitle {
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 300;
   color: white;
 }
 
+.boldTitle {
+  font-weight: 400;
+}
+
 .headsub {
   color: #FFEE58;
-  font-size: 17px;
+  font-size: 15px;
+  margin-bottom: 0px;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -80,19 +94,18 @@ html, body {
 }
 
 .pcswlogo {
-  width: 75px;
-  height: 69px;
+  width: 65px;
+  height: 60px;
   margin-right: 12px;
 }
 
 .pcswName {
   margin-bottom: 0px;
+  font-size: 14px;
 }
 
 .socialExplore {
   color: white;
-  position: absolute;
-  bottom: 25px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -100,7 +113,7 @@ html, body {
 
 .socIcons {
   font-size: 18px;
-  color: #FFEE58;
+  color: #fff;
 }
 
 .exploreIndicatorsSpan {
@@ -108,7 +121,7 @@ html, body {
 }
 
 .landingArrow {
-  font-size: 20px;
+  font-size: 17px;
   margin-left: 5px;
   color: #FFEE58;
 }
@@ -121,4 +134,57 @@ html, body {
 .socMidIcon {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+@media only screen and (max-width: 845px) {
+  .landTitle {
+    font-size: 22px;
+  }
+  .headsub {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .landingArrow {
+    font-size: 15px;
+  }
+  .socialExplore {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .pcswName {
+    font-size: 12px;
+  }
+  .pcswlogo {
+    width: 55px;
+    height: 50px;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .landTitle {
+    font-size: 26px;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  .landTitle {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 445px) {
+  .landTitle {
+    font-size: 20px;
+  }
+  .headsub {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  .landingArrow {
+    font-size: 13px;
+  }
+  .socIcons {
+    font-size: 14px;
+  }
 }
