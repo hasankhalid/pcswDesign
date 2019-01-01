@@ -37,7 +37,7 @@ function conIndNum(data){
 
 
 // defining the params for the chart
-const dataScProm = d3.csv('testScatter.csv');
+//const dataScProm = d3.csv('testScatter.csv');
 
 const widthSVG = 750;
 const heightSVG = 680;
@@ -136,7 +136,7 @@ function computeExtents(data, indArray){
 // define the dimensions and margins
 function drawScatterPlot(data, indArray, scale){
   // setting up the SVG
-  let SVG = d3.select('body')
+  let SVG = d3.select('#scatterContain')
     .append('svg')
     .attr('height', heightSVG)
     .attr('width', widthSVG);
@@ -466,6 +466,7 @@ function Hover(over){
     }
 
     function addRemTitle(selection){
+      console.log(selection);
       if (over) {
         selection.append('title')
           .style('fill', 'white')

@@ -17,43 +17,139 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:200,300,400,500,600" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" rel="stylesheet">
+    <link href="./animate.css" rel="stylesheet">
+
     <link rel="stylesheet" href="./index.css">
   </head>
 
   <body>
-    <div class="landing">
-      <div class="imageContain">
-      </div>
-      <div class="landingOverlay">
-      </div>
-      <div class="container landingContainer">
-        <div class="row landingRow">
-          <div class="col-12">
-            <div class="topNav">
-              <div class="pcsw">
-                <img src="./resources/logo.png" alt="Punjab Commission on the status of women" class="pcswlogo"></img>
-                <div>
-                  <p class="pcswName">PUNJAB COMMISSION ON THE</p>
-                  <p class="pcswName">STATUS OF WOMEN</p>
+    <div class='applicationWrap' onclick="void(0)">
+      <div class="landing">
+        <div class="aboutProjectOverlay">
+          <div class="container landingContainer">
+            <div class="row landingRow">
+              <div class="col-12">
+                <div class="topNav">
+                  <div class="pcsw">
+                    <img src="./resources/logo.png" alt="Punjab Commission on the status of women" class="pcswlogo"></img>
+                    <div>
+                      <p class="pcswName">PUNJAB COMMISSION ON THE</p>
+                      <p class="pcswName">STATUS OF WOMEN</p>
+                    </div>
+                  </div>
+                  <i class="far fa-times-circle"></i>
+                </div>
+                <div class="titleContainerMenu">
+                  <p class="onTopLanding landTitle">GENERATING DATA TO ADVANCE <span class="boldTitle">WOMEN'S SOCIAL & ECONOMIC WELLBEING</span> IN PAKISTAN</p>
+                  <div class="socialExplore socialExploreOverlay">
+                    <span class="onTopLanding headsub">Punjab Commission on the status of women | Beaureu of statistics, Punjab</i></span>
+                    <div class="socIcons onTopLanding">
+                      <i class="fab fa-facebook-f socIcon"></i>
+                      <i class="fab fa-twitter socMidIcon socIcon"></i>
+                      <i class="fas fa-link socIcon"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <p class="aboutProject">ABOUT</p>
             </div>
-            <div class="titleContainer">
-              <p class="onTopLanding landTitle">GENERATING DATA TO ADVANCE <span class="boldTitle">WOMEN'S SOCIAL & ECONOMIC WELLBEING</span> IN PAKISTAN</p>
-              <div class="socialExplore">
-                <span class="onTopLanding headsub">Explore district level indicators for the ESW Project<i class="fas fa-arrow-circle-down landingArrow"></i></span>
-                <div class="socIcons onTopLanding">
-                  <i class="fab fa-facebook-f"></i>
-                  <i class="fab fa-twitter socMidIcon"></i>
-                  <i class="fas fa-link"></i>
+          </div>
+        </div>
+        <div class="imageContain">
+        </div>
+        <div class="landingOverlay">
+        </div>
+        <div class="container landingContainer">
+          <div class="row landingRow">
+            <div class="col-12">
+              <div class="topNav">
+                <div class="pcsw">
+                  <img src="./resources/logo.png" alt="Punjab Commission on the status of women" class="pcswlogo"></img>
+                  <div>
+                    <p class="pcswName">PUNJAB COMMISSION ON THE</p>
+                    <p class="pcswName">STATUS OF WOMEN</p>
+                  </div>
+                </div>
+                <p class="aboutProject">ABOUT</p>
+              </div>
+              <div class="titleContainer">
+                <p class="onTopLanding landTitle">GENERATING DATA TO ADVANCE <span class="boldTitle">WOMEN'S SOCIAL & ECONOMIC WELLBEING</span> IN PAKISTAN</p>
+                <div class="socialExplore">
+                  <span class="onTopLanding headsub">Explore district level indicators for the ESW Project<i class="fas fa-arrow-circle-down landingArrow"></i></span>
+                  <div class="socIcons onTopLanding">
+                    <i class="fab fa-facebook-f socIcon facebookSoc"></i>
+                    <i class="fab fa-twitter socMidIcon socIcon twitterSoc"></i>
+                    <i class="fas fa-link socIcon webSoc"></i>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="scatterContainer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <p class="sectionHeading">Scatter Plot</p>
+              <p class="sectiondescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-4 order-xl-2 order-lg-2">
+              <div class="panelContainer">
+                <div id="threeInputsContain">
+                  <p class="subSectionHeading">Select Indicators</p>
+                  <div class="input">
+                    <select id="threeIndOne">
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="mercedes">Mercedes</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                  <div class="input">
+                    <select id="threeIndTwo">
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="mercedes">Mercedes</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                  <div class="input">
+                    <select id="threeIndThree">
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="mercedes">Mercedes</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="selectedIndicators">
+                  <p class="subSectionHeading">Showing All Divisions</p>
+                  <p class="subSectionHeading">Selected Indicators</p>
+                  <ul class="selectedIndicatorList">
+                    <li indicatorID="threeIndOne" class="sectiondescriptionList">Indicator One</li>
+                    <li indicatorID="threeIndTwo" class="sectiondescriptionList">Indicator One</li>
+                    <li indicatorID="threeIndThree" class="sectiondescriptionList">Indicator One</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-8 order-xl-1 order-lg-1">
+              <div id="scatterContain">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+
 
     <footer>
       <div class="container">
@@ -64,5 +160,51 @@
         </div>
       </div>
     </footer>
+
+    <script src="./scatter.js"></script>
+    <script>
+
+      $(".facebookSoc").click(function() {
+        window.open('https://www.facebook.com/pcswpb', '_blank');
+      });
+
+      $(".twitterSoc").click(function() {
+        window.open('https://twitter.com/pcswpb', '_blank');
+      });
+
+      $(".webSoc").click(function() {
+        window.open('https://pcsw.punjab.gov.pk/', '_blank');
+      });
+
+      $(".aboutProject").click(function() {
+        $('html').css("overflow-y", "hidden"); //Makes page unscrollable on full navigation menu
+        $('.aboutProjectOverlay').show().addClass('animated fadeIn');
+        $('.aboutProjectOverlay').css("z-index", "6");
+      });
+
+      $(".fa-times-circle").click(function() {
+        $('html').css("overflow-y", "visible");
+        $('.aboutProjectOverlay').removeClass('fadeIn');
+        setTimeout(function () {
+          $('.aboutProjectOverlay').addClass('animated fadeOut')}, 275);
+      });
+
+      $('.aboutProjectOverlay').on("animationend", function () {
+        if ($(this).hasClass("fadeOut") === true) {
+          $('.aboutProjectOverlay').css("z-index", "-1");
+          $('.aboutProjectOverlay').removeClass('fadeOut');
+        }
+      })
+
+      $('#threeIndOne').selectize({
+        sortField: 'text'
+      });
+      $('#threeIndTwo').selectize({
+        sortField: 'text'
+      });
+      $('#threeIndThree').selectize({
+        sortField: 'text'
+      });
+    </script>
   </body>
 </html>
