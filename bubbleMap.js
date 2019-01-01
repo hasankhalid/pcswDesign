@@ -7,7 +7,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 	var colorLegend;
 	var circleLegend;
 
-	var legendColors = ['#FFFFFF','#F44336'];
+	var legendColors = ['#F44336','#FFFFFF'];
 
 	var svg = d3.select(svgSelector);
 

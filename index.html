@@ -26,6 +26,9 @@
     <link href="./animate.css" rel="stylesheet">
 
     <link rel="stylesheet" href="./index.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
   </head>
 
   <body>
@@ -167,6 +170,9 @@
                     <option value="audi">Audi</option>
                   </select>
                 </div>
+                <div style="width: 100%; margin-bottom: 20px;">
+                  <input type="text" id="indOneMinMax" name="indicatorOne_range" value="" />
+                </div>
                 <div class="input">
                   <select id="twoIndTwo">
                     <option value="volvo">Volvo</option>
@@ -174,6 +180,9 @@
                     <option value="mercedes">Mercedes</option>
                     <option value="audi">Audi</option>
                   </select>
+                </div>
+                <div style="width: 100%;  margin-bottom: 20px;">
+                  <input type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
                 </div>
               </div>
               <div id="selectedIndicators">
@@ -202,11 +211,19 @@
 
 
 
-    <footer>
+    <footer class="footer">
       <div class="container">
         <div class="row">
-          <div class="col-12">
-
+          <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+            <h2>Punjab Commision on the status of women</h2>
+            <p class="officeContact"><i class="fas fa-map-marker-alt"></i>88 Shadman II, Lahore</p>
+            <p class="officeContact"><i class="fas fa-phone"></i>+92 42 99268000-4</p>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <h2>Social</h2>
+            <p class="officeContact">Facebook</p>
+            <p class="officeContact">Twitter</p>
+            <p class="officeContact">Visit PCSW website</p>
           </div>
         </div>
       </div>
@@ -264,6 +281,24 @@
       });
       $('#twoIndTwo').selectize({
         sortField: 'text'
+      });
+
+      $("#indOneMinMax").ionRangeSlider({
+          type: "double",
+          grid: true,
+          min: 1,
+          max: 100,
+          from: 1,
+          to: 100,
+      });
+
+      $("#indTwoMinMax").ionRangeSlider({
+          type: "double",
+          grid: true,
+          min: 1,
+          max: 100,
+          from: 1,
+          to: 100,
       });
 
       var bubbleMap;

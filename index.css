@@ -317,6 +317,26 @@ svg circle { mix-blend-mode: screen; }
   font-size: 14px;
 }
 
+.footer {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-bottom: 20px solid #D84315;
+  background-image: linear-gradient(to right bottom, #e0e0e0, #e8e8e8, #efefef, #f7f7f7, #ffffff);
+}
+
+.fa-phone {
+  margin-right: 5px;
+}
+
+.fa-map-marker-alt {
+  margin-right: 14px;
+}
+
+.officeContact {
+  margin-bottom: 5px;
+  color: #616161;
+}
+
 @media only screen and (max-width: 845px) {
   .landTitle {
     font-size: 22px;
