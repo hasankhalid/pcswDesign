@@ -17,7 +17,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 		circleLegend = bubbleMap.createConcentricCircleLegend(rLegendSelector, [50,100], ['','']);
 		colorLegend = bubbleMap.createColorLegend(cLegendSelector, legendColors,['','']);
-			
+
 
 		innerGJ.features.forEach((d)=>{
 			d.properties.districts = bosNames[d.properties.districts];
@@ -52,7 +52,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 		    	.attr('stroke-dashoffset', function(){
 		    		return this.getTotalLength();
 		    	});
-		    
+
 
 		new Promise(function(resolve){
 			svg.append('g')
@@ -90,15 +90,15 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 		});
 	}
 
-	function allTransitionEnd(transition, callback) { 
+	function allTransitionEnd(transition, callback) {
 	    if (typeof callback !== "function") throw new Error("Wrong callback in endall");
 	    if (transition.size() === 0) { callback() }
-	    var n = 0; 
-	    transition 
-	        .each(function() { ++n; }) 
+	    var n = 0;
+	    transition
+	        .each(function() { ++n; })
 	        .on("end", function() {
-	         	if (!--n) callback(); 
-	     	}); 
+	         	if (!--n) callback();
+	     	});
 	}
 
 	//filter code
@@ -136,7 +136,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 	}
 
 	function executeFilter(){
-		
+
 		//remove filter class
 		/*svg.selectAll('.g-circles circle')
 			.classed('c-filter-show', false);*/
@@ -173,7 +173,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 		return selection;
 	}
 
-	var currentIdicators = {};  
+	var currentIdicators = {};
 
 	function createCircle(rIndicator, cIndicator){
 
@@ -255,7 +255,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 		var selectedCircle = this;
 
 		d3.selectAll('.g-map').selectAll('path').filter((e)=>e.properties.districts === d.District).transition().duration(400).attr('stroke-dashoffset',0);
-		
+
 		d3.selectAll('.g-circles circle')
 			.filter(function(){
 				return this.style.opacity !== '0';
@@ -274,7 +274,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 		var selectedCircle = this;
 
 		d3.selectAll('.g-map').selectAll('path').filter((e)=>e.properties.districts === d.District).transition().duration(400).attr('stroke-dashoffset',function(){return this.getTotalLength()});
-		
+
 		d3.selectAll('.g-circles circle')
 			.filter(function(){
 				return this.style.opacity !== '0';

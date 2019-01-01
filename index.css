@@ -263,6 +263,60 @@ html, body {
 
 svg circle { mix-blend-mode: screen; }
 
+.g-map {
+  transform : translate(50px, 50px);
+  fill : none;
+  stroke: #3F51B5;
+    stroke-width: 1.2px
+}
+
+.g-circles {
+  transform : translate(50px, 50px);
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+.g-outline {
+  transform : translate(50px, 50px);
+  stroke: #2196F3;
+  fill: none;
+  stroke-width: 1.2px;
+}
+
+.c-tooltip {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  width: 220px;
+  background-color: rgba(238, 238, 238, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 17px;
+}
+
+.c-tooltip-header {
+  background-color: rgba(65, 42, 187, 0.6);
+  color: white;
+  margin: -10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+}
+
+.c-tooltip-header h1 {
+  font-size: 18px;
+    font-weight: 500;
+}
+
+.c-tooltip-body div {
+  margin: 5px 5px;
+}
+
+.c-tooltip-body {
+  font-size: 14px;
+}
+
 @media only screen and (max-width: 845px) {
   .landTitle {
     font-size: 22px;
