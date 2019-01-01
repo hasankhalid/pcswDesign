@@ -48,7 +48,7 @@
                 <div class="titleContainerMenu">
                   <p class="onTopLanding landTitle">GENERATING DATA TO ADVANCE <span class="boldTitle">WOMEN'S SOCIAL & ECONOMIC WELLBEING</span> IN PAKISTAN</p>
                   <div class="socialExplore socialExploreOverlay">
-                    <span class="onTopLanding headsub">Punjab Commission on the status of women | Beaureu of statistics, Punjab</i></span>
+                    <span class="onTopLanding headsub">Punjab Commission on the Status of Women | Beaureu of Statistics, Punjab</i></span>
                     <div class="socIcons onTopLanding">
                       <i class="fab fa-facebook-f socIcon"></i>
                       <i class="fab fa-twitter socMidIcon socIcon"></i>
@@ -148,6 +148,51 @@
         </div>
       </div>
     </div>
+    <div class="scatterContainer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <p class="sectionHeading">Compare two Indicators</p>
+            <p class="sectiondescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-3 col-xl-4 order-xl-2 order-lg-2">
+            <div class="panelContainer">
+              <div id="threeInputsContain">
+                <p class="subSectionHeading">Select Indicators</p>
+                <div class="input">
+                  <select id="twoIndOne">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </div>
+                <div class="input">
+                  <select id="twoIndTwo">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </div>
+              </div>
+              <div id="selectedIndicators">
+                <p class="subSectionHeading">Selected Indicators</p>
+                <ul class="selectedIndicatorList">
+                  <li indicatorID="twoIndOne" class="sectiondescriptionList">Indicator One</li>
+                  <li indicatorID="twoIndTwo" class="sectiondescriptionList">Indicator One</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-9 col-xl-8 order-xl-1 order-lg-1">
+            <div id="mapContain">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -203,6 +248,13 @@
         sortField: 'text'
       });
       $('#threeIndThree').selectize({
+        sortField: 'text'
+      });
+
+      $('#twoIndOne').selectize({
+        sortField: 'text'
+      });
+      $('#twoIndTwo').selectize({
         sortField: 'text'
       });
     </script>
