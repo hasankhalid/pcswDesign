@@ -193,7 +193,7 @@ html, body {
   margin-bottom: 8px;
 }
 
-#selectedIndicators {
+#selectedIndicators, #mapSelectedIndicators {
   padding: 20px;
   border-radius: 10px;
   border: 1px solid #FF8A65;

@@ -182,14 +182,14 @@
                   </select>
                 </div>
                 <div style="width: 100%;  margin-bottom: 20px;">
-                  <input type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
+                  <input data-ind-id="twoIndOne" type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
                 </div>
               </div>
-              <div id="selectedIndicators">
+              <div id="mapSelectedIndicators">
                 <p class="subSectionHeading">Selected Indicators</p>
                 <ul class="selectedIndicatorList">
-                  <li indicatorID="twoIndOne" class="sectiondescriptionList">Indicator One</li>
-                  <li indicatorID="twoIndTwo" class="sectiondescriptionList">Indicator One</li>
+                  <li data-indicatorID="twoIndOne" class="sectiondescriptionList">Indicator One</li>
+                  <li data-indicatorID="twoIndTwo" class="sectiondescriptionList">Indicator One</li>
                 </ul>
               </div>
             </div>
@@ -208,8 +208,6 @@
       </div>
     </div>
   </div>
-
-
 
     <footer class="footer">
       <div class="container">
@@ -283,23 +281,15 @@
         sortField: 'text'
       });*/
 
-      $("#indOneMinMax").ionRangeSlider({
-          type: "double",
-          grid: true,
-          min: 1,
-          max: 100,
-          from: 1,
-          to: 100,
-      });
 
-      $("#indTwoMinMax").ionRangeSlider({
+     /* $("#indTwoMinMax").ionRangeSlider({
           type: "double",
           grid: true,
           min: 1,
           max: 100,
           from: 1,
           to: 100,
-      });
+      });*/
 
       var bubbleMap;
       var mapData;
@@ -307,6 +297,45 @@
       Promise.all([d3.csv('ScatterPlotInds.csv'),d3.json('PunjabBound.geojson'),d3.json('PunjDistNoIsl.geojson')])
   		.then((data)=>{
         mapData = data[0];
+
+  			bubbleMap = getBubbleMapCreator(data[0], data[1], data[2],'#mapContain svg', '#mapContain .r-legend', '#mapContain .c-legend');
+  			bubbleMap.createMap(defaultMapIndicators[0], defaultMapIndicators[1]);
+
+        $("#indOneMinMax").ionRangeSlider({
+            type: "double",
+            grid: true,
+            min: 1,
+            max: 100,
+            from: 1,
+            to: 100,
+            onChange : function(data){
+              console.log(data);
+              //var indId = data.input[0].dataset.indId;
+              var indicator = $('#twoIndOne').val();
+              bubbleMap.addNumericFilter(data.from, data.to, indicator);
+              bubbleMap.executeFilter();
+            }
+        });
+
+        rFilter = $("#indOneMinMax").data("ionRangeSlider");
+
+        $("#indTwoMinMax").ionRangeSlider({
+            type: "double",
+            grid: true,
+            min: 1,
+            max: 100,
+            from: 1,
+            to: 100,
+            onChange : function(data){
+              console.log(data);
+              //var indId = data.input[0].dataset.indId;
+              var indicator = $('#twoIndTwo').val();
+              bubbleMap.addNumericFilter(data.from, data.to, indicator);
+              bubbleMap.executeFilter();
+            }
+        });
+
+        cFilter = $("#indTwoMinMax").data("ionRangeSlider");        
 
         initSelectize(mapData.columns,
           {District : true, Division : true},
@@ -316,17 +345,59 @@
             var rIndicator = $('#twoIndOne').val();
             var cIndicator = $('#twoIndTwo').val();
 
+            $('[data-indicatorId=twoIndOne]').text('Radius Indicator : ' + rIndicator);
+            $('[data-indicatorId=twoIndTwo]').text('Color Indicator : ' + cIndicator);
+
+            var minR = Math.floor(bubbleMap.getMinIndVal(rIndicator));
+            var maxR = Math.ceil(bubbleMap.getMaxIndVal(rIndicator));
+            rFilter.update({
+              min : minR,
+              max : maxR,
+              from : minR,
+              to : maxR 
+            });
+
+            var minC = Math.floor(bubbleMap.getMinIndVal(cIndicator));
+            var maxC = Math.ceil(bubbleMap.getMaxIndVal(cIndicator));
+            cFilter.update({
+              min : minC,
+              max : maxC,
+              from : minC,
+              to : maxC 
+            });
+
+            bubbleMap.removeAllFilters();
+            bubbleMap.executeFilter();
             bubbleMap.createCircle(rIndicator, cIndicator);
+
           },
-          defaultMapIndicators
+          defaultMapIndicators,
+          function(e){
+            $('[data-indicatorId=twoIndOne]').text('Radius Indicator : ' + defaultMapIndicators[0]);
+            $('[data-indicatorId=twoIndTwo]').text('Color Indicator : ' + defaultMapIndicators[1]);
+
+            var minR = Math.floor(bubbleMap.getMinIndVal(defaultMapIndicators[0]));
+            var maxR = Math.ceil(bubbleMap.getMaxIndVal(defaultMapIndicators[0]));
+            rFilter.update({
+              min : minR,
+              max : maxR,
+              from : minR,
+              to : maxR 
+            });
+
+            var minC = Math.floor(bubbleMap.getMinIndVal(defaultMapIndicators[1]));
+            var maxC = Math.ceil(bubbleMap.getMaxIndVal(defaultMapIndicators[1]));
+            cFilter.update({
+              min : minC,
+              max : maxC,
+              from : minC,
+              to : maxC 
+            });
+          }
         );
-
-
-  			bubbleMap = getBubbleMapCreator(data[0], data[1], data[2],'#mapContain svg', '#mapContain .r-legend', '#mapContain .c-legend');
-  			bubbleMap.createMap(defaultMapIndicators[0], defaultMapIndicators[1]);
   		});
 
-      function initSelectize(options, excludeObj, selectors, groupName, cb, defaultVals){
+      function initSelectize(options, excludeObj, selectors, groupName, cb, defaultVals, initFunc){
 
         options = options.filter(function(d){
           return !excludeObj[d];
@@ -354,19 +425,10 @@
               return;
             }
 
-            /*console.log(selected);
-
-            groupEls = $(`[data-group=${groupName}]`);
-
-            groupEls.each(function(i){
-
-              var element = groupEls[i];
-              if(element !== this){
-                d.selectize.updateOption(selected, {name: selected , disable: true});
-              }
-            });*/
             cb(e);
           });
+
+          initFunc();
         });
       }
 
