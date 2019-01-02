@@ -112,7 +112,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 	function addNumericFilter(min,max,ind){
 		var filterFunc = (d)=>{
 			var val = parseFloat(d[ind]);
-			return val > min && val < max;
+			return val >= min && val <= max;
 		};
 
 		var filter = new filterModule.Filter(filterFunc, ind);
@@ -197,23 +197,26 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 		})
 		.then(function(){
+
+			var maxrIndVal = parseFloat(d3.max(csvData,(d)=>parseFloat(d[rIndicator])));
+
 			var rScale = d3.scaleSqrt().domain([
 					0,
-					parseFloat(d3.max(csvData,(d)=>parseFloat(d[rIndicator])))
+					maxrIndVal
 				]).range([0,22]);
 
 			//update legend
-			var maxrIndVal = parseFloat(d3.max(csvData,(d)=>parseFloat(d[rIndicator])));
 
 			updateLegendText(circleLegend, [Math.floor(maxrIndVal/2), maxrIndVal]);
 
 			var maxcIndVal = parseFloat(d3.max(csvData,(d)=>parseFloat(d[cIndicator])));
+			var mincIndVal = parseFloat(d3.min(csvData,(d)=>parseFloat(d[cIndicator])));
 
-			updateLegendText(colorLegend, [Math.floor(maxcIndVal/2), maxcIndVal]);
+			updateLegendText(colorLegend, [Math.floor(mincIndVal), maxcIndVal]);
 
 			var colorScale = d3.scaleLinear().domain([
-					parseFloat(d3.min(csvData,(d)=>parseFloat(d[cIndicator]))),
-					parseFloat(d3.max(csvData,(d)=>parseFloat(d[cIndicator])))
+					mincIndVal,
+					maxcIndVal
 				])
         		.range(legendColors);
 
@@ -254,7 +257,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 		var selectedCircle = this;
 
-		d3.selectAll('.g-map').selectAll('path').filter((e)=>e.properties.districts === d.District).transition().duration(400).attr('stroke-dashoffset',0);
+		d3.selectAll('.g-map').selectAll('path').filter((e)=>e.properties.districts === d.District).raise().transition().duration(400).attr('stroke-dashoffset',0);
 
 		d3.selectAll('.g-circles circle')
 			.filter(function(){
@@ -494,6 +497,14 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 			.text((d)=>d);
 	}
 
+	function getMinIndVal(ind){
+		return parseFloat(d3.min(csvData,(d)=>parseFloat(d[ind])));
+	}
+
+	function getMaxIndVal(ind){
+		return parseFloat(d3.max(csvData,(d)=>parseFloat(d[ind])));
+	}
+
 	return {
 		createCircle : createCircle,
 		createMap : createMap,
@@ -502,7 +513,9 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 		executeFilter : executeFilter,
 		removeFilter : removeFilter,
 		addNumericFilter : addNumericFilter,
-		removeAllFilters : removeAllFilters
+		removeAllFilters : removeAllFilters,
+		getMinIndVal :getMinIndVal,
+		getMaxIndVal : getMaxIndVal
 	};
 }
 
