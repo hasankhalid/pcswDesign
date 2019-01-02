@@ -403,21 +403,30 @@
           return !excludeObj[d];
         });
 
-        options = options.map((d)=>{return {name : d, text : d, value : d, disable : false};});
-        console.log(options);
+        /*options = options.map((d)=>{return {name : d, text : d, value : d, disable : false};});*/
 
         selectors.forEach(function(d,i){
           var el = $(d);
 
           el.attr('data-group', groupName);
 
+          var elOptions = options.map(
+              function(o){
+                if(defaultVals.includes(o) && o !== defaultVals[i]){
+                  return {name : o, text : o, value : o, disable : true};
+                }else{
+                  return {name : o, text : o, value : o, disable : false};
+                }
+              }
+            );
           el.selectize({
             sortField : 'text',
-            options : options,
+            options : elOptions,
             disabledField: 'disable'
           });
 
           el[0].selectize.setValue(defaultVals[i], true);
+
           el.on('change', function(e){
 
             var selected = e.target.value;
