@@ -182,7 +182,7 @@
                   </select>
                 </div>
                 <div style="width: 100%;  margin-bottom: 20px;">
-                  <input data-ind-id="twoIndOne" type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
+                  <input type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
                 </div>
               </div>
               <div id="mapSelectedIndicators">
@@ -403,7 +403,7 @@
           return !excludeObj[d];
         });
 
-        options = options.map((d)=>{return {text : d, value : d};});
+        options = options.map((d)=>{return {name : d, text : d, value : d, disable : false};});
         console.log(options);
 
         selectors.forEach(function(d,i){
@@ -413,7 +413,8 @@
 
           el.selectize({
             sortField : 'text',
-            options : options
+            options : options,
+            disabledField: 'disable'
           });
 
           el[0].selectize.setValue(defaultVals[i], true);
@@ -425,6 +426,16 @@
               return;
             }
 
+            var selectGroup = Array.from(document.querySelectorAll(`[data-group=${groupName}]`));
+
+            selectGroup = selectGroup.filter((d)=>d !== this);
+
+            selectGroup.forEach((e)=>{
+              Object.keys(e.selectize.options).forEach((d)=>{
+                var disable = d === selected;
+                e.selectize.updateOption(d,{disable : disable, value : d, name : d, text : d});
+              });
+            });
             cb(e);
           });
 
