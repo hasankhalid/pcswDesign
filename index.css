@@ -141,7 +141,7 @@ html, body {
   color: #fff;
 }
 
-.socIcon {
+.socIcon, .officeContact {
   cursor: pointer;
 }
 
