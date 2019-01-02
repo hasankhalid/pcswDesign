@@ -390,10 +390,15 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 	function createConcentricCircleLegend(selector, intervalArr, valArr){
 		var legendSVG = d3.select(selector)
+			.style('position', 'absolute')
+			.style('bottom', '60px')
+			.style('right', '225px')
 			.append('svg')
-			.attr('viewBox', '-52 -42 140 70')
 			.attr('width', 140)
-			.attr('height', 70);
+			.attr('height', 70)
+			.attr('viewBox', '-52 -42 140 70')
+			.attr("preserveAspectRatio", "xMinYMin meet")
+			.style('fill', '#fff');
 
 		var rScale = d3.scaleSqrt().domain([0,100]).range([0,22]);
 		legendSVG.selectAll('circle')
@@ -404,7 +409,7 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 			.attr('cy', (d)=>rScale(100) - rScale(d))
 			.attr('r', (d)=>rScale(d))
 			.attr('fill', 'none')
-			.attr('stroke', '#000')
+			.attr('stroke', '#fff')
 			.attr('stroke-width', '2');
 
 		legendSVG.selectAll('text')
@@ -429,10 +434,14 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 	function createColorLegend(selector, intervalArr, valArr){
 		var legendSVG = d3.select(selector)
+			.style('position', 'absolute')
+			.style('bottom', '60px')
+			.style('right', '5px')
 			.append('svg')
 			.attr('viewBox', '0 0 200 200')
 			.attr('width', 200)
-			.attr('height', 200);
+			.attr('height', 200)
+			.style('fill', '#fff');
 
 		gradient = legendSVG.append('defs')
 			.append('linearGradient')

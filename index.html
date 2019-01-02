@@ -221,9 +221,9 @@
           </div>
           <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <h2>Social</h2>
-            <p class="officeContact facebookSoc">Facebook</p>
-            <p class="officeContact twitterSoc">Twitter</p>
-            <p class="officeContact webSoc">Visit PCSW website</p>
+            <p class="officeContact facebookSoc footerSoc">Facebook</p>
+            <p class="officeContact twitterSoc footerSoc">Twitter</p>
+            <p class="officeContact webSoc footerSoc">Visit PCSW website</p>
           </div>
         </div>
       </div>
@@ -308,7 +308,7 @@
   		.then((data)=>{
         mapData = data[0];
 
-        initSelectize(mapData.columns, 
+        initSelectize(mapData.columns,
           {District : true, Division : true},
           ['#twoIndOne', '#twoIndTwo'],
           'map-indicators',
@@ -316,7 +316,7 @@
             var rIndicator = $('#twoIndOne').val();
             var cIndicator = $('#twoIndTwo').val();
 
-            bubbleMap.createCircle(rIndicator, cIndicator); 
+            bubbleMap.createCircle(rIndicator, cIndicator);
           },
           defaultMapIndicators
         );
@@ -339,7 +339,7 @@
           var el = $(d);
 
           el.attr('data-group', groupName);
-          
+
           el.selectize({
             sortField : 'text',
             options : options
