@@ -276,12 +276,12 @@
         sortField: 'text'
       });
 
-      $('#twoIndOne').selectize({
+      /*$('#twoIndOne').selectize({
         sortField: 'text'
       });
       $('#twoIndTwo').selectize({
         sortField: 'text'
-      });
+      });*/
 
       $("#indOneMinMax").ionRangeSlider({
           type: "double",
@@ -302,12 +302,73 @@
       });
 
       var bubbleMap;
-
+      var mapData;
+      var defaultMapIndicators = ['Experienced physical or sexual spousal violence', 'Sought help post-violence'];
       Promise.all([d3.csv('ScatterPlotInds.csv'),d3.json('PunjabBound.geojson'),d3.json('PunjDistNoIsl.geojson')])
   		.then((data)=>{
+        mapData = data[0];
+
+        initSelectize(mapData.columns, 
+          {District : true, Division : true},
+          ['#twoIndOne', '#twoIndTwo'],
+          'map-indicators',
+          function(e){
+            var rIndicator = $('#twoIndOne').val();
+            var cIndicator = $('#twoIndTwo').val();
+
+            bubbleMap.createCircle(rIndicator, cIndicator); 
+          },
+          defaultMapIndicators
+        );
+
+
   			bubbleMap = getBubbleMapCreator(data[0], data[1], data[2],'#mapContain svg', '#mapContain .r-legend', '#mapContain .c-legend');
-  			bubbleMap.createMap();
+  			bubbleMap.createMap(defaultMapIndicators[0], defaultMapIndicators[1]);
   		});
+
+      function initSelectize(options, excludeObj, selectors, groupName, cb, defaultVals){
+
+        options = options.filter(function(d){
+          return !excludeObj[d];
+        });
+
+        options = options.map((d)=>{return {text : d, value : d};});
+        console.log(options);
+
+        selectors.forEach(function(d,i){
+          var el = $(d);
+
+          el.attr('data-group', groupName);
+          
+          el.selectize({
+            sortField : 'text',
+            options : options
+          });
+
+          el[0].selectize.setValue(defaultVals[i], true);
+          el.on('change', function(e){
+
+            var selected = e.target.value;
+
+            if(!selected){
+              return;
+            }
+
+            /*console.log(selected);
+
+            groupEls = $(`[data-group=${groupName}]`);
+
+            groupEls.each(function(i){
+
+              var element = groupEls[i];
+              if(element !== this){
+                d.selectize.updateOption(selected, {name: selected , disable: true});
+              }
+            });*/
+            cb(e);
+          });
+        });
+      }
 
     </script>
   </body>
