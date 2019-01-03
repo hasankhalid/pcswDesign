@@ -136,9 +136,9 @@
                   <p class="subSectionHeading">Showing All Divisions</p>
                   <p class="subSectionHeading">Selected Indicators</p>
                   <ul class="selectedIndicatorList">
-                    <li indicatorID="threeIndOne" class="sectiondescriptionList">Indicator One</li>
-                    <li indicatorID="threeIndTwo" class="sectiondescriptionList">Indicator One</li>
-                    <li indicatorID="threeIndThree" class="sectiondescriptionList">Indicator One</li>
+                    <li data-indicatorId="threeIndOne" class="sectiondescriptionList">Indicator One</li>
+                    <li data-indicatorId="threeIndTwo" class="sectiondescriptionList">Indicator One</li>
+                    <li data-indicatorId="threeIndThree" class="sectiondescriptionList">Indicator One</li>
                   </ul>
                 </div>
               </div>
@@ -160,7 +160,7 @@
           </div>
           <div class="col-sm-12 col-md-12 col-lg-3 col-xl-4 order-xl-2 order-lg-2">
             <div class="panelContainer">
-              <div id="threeInputsContain">
+              <div id="thwoInputsContain">
                 <p class="subSectionHeading">Select Indicators</p>
                 <div class="input">
                   <select id="twoIndOne">
@@ -264,7 +264,7 @@
         }
       })
 
-      $('#threeIndOne').selectize({
+      /*$('#threeIndOne').selectize({
         sortField: 'text'
       });
       $('#threeIndTwo').selectize({
@@ -274,7 +274,7 @@
         sortField: 'text'
       });
 
-      /*$('#twoIndOne').selectize({
+      $('#twoIndOne').selectize({
         sortField: 'text'
       });
       $('#twoIndTwo').selectize({
@@ -294,6 +294,8 @@
       var bubbleMap;
       var mapData;
       var defaultMapIndicators = ['Experienced physical or sexual spousal violence', 'Sought help post-violence'];
+      var defaultScatterIndicators = ['Experienced physical or sexual spousal violence', 'Sought help post-violence', 'Experienced physical or sexual violence by other family members'];
+
       Promise.all([d3.csv('ScatterPlotInds.csv'),d3.json('PunjabBound.geojson'),d3.json('PunjDistNoIsl.geojson')])
   		.then((data)=>{
         mapData = data[0];
@@ -335,7 +337,36 @@
             }
         });
 
-        cFilter = $("#indTwoMinMax").data("ionRangeSlider");        
+        cFilter = $("#indTwoMinMax").data("ionRangeSlider");
+
+
+        initSelectize(mapData.columns,
+          {District : true, Division : true},
+          ['#threeIndOne', '#threeIndTwo', '#threeIndThree'],
+          'scatter-indicators',
+          function(e){
+            var xIndicator = $('#threeIndOne').val();
+            var yIndicator = $('#threeIndTwo').val();
+            var sIndicator = $('#threeIndThree').val();
+
+            var reShufArr = [xIndicator, yIndicator, sIndicator];
+
+            console.log(reShufArr);
+
+            $('[data-indicatorId=threeIndOne]').text('X-Axis Indicator : ' + xIndicator);
+            $('[data-indicatorId=threeIndTwo]').text('Y-Axis Indicator : ' + yIndicator);
+            $('[data-indicatorId=threeIndThree]').text('Circle size Indicator : ' + sIndicator);
+
+            transScatterPlot(dataScProm, 2000, reShufArr, true)
+
+          },
+          defaultMapIndicators,
+          function(e){
+            $('[data-indicatorId=threeIndOne]').text('X-Axis Indicator : ' + defaultScatterIndicators[0]);
+            $('[data-indicatorId=threeIndTwo]').text('Y-Axis Indicator : ' + defaultScatterIndicators[1]);
+            $('[data-indicatorId=threeIndThree]').text('Circle size Indicator : ' + defaultScatterIndicators[2]);
+          }
+        );
 
         initSelectize(mapData.columns,
           {District : true, Division : true},
@@ -354,7 +385,7 @@
               min : minR,
               max : maxR,
               from : minR,
-              to : maxR 
+              to : maxR
             });
 
             var minC = Math.floor(bubbleMap.getMinIndVal(cIndicator));
@@ -363,7 +394,7 @@
               min : minC,
               max : maxC,
               from : minC,
-              to : maxC 
+              to : maxC
             });
 
             bubbleMap.removeAllFilters();
@@ -382,7 +413,7 @@
               min : minR,
               max : maxR,
               from : minR,
-              to : maxR 
+              to : maxR
             });
 
             var minC = Math.floor(bubbleMap.getMinIndVal(defaultMapIndicators[1]));
@@ -391,7 +422,7 @@
               min : minC,
               max : maxC,
               from : minC,
-              to : maxC 
+              to : maxC
             });
           }
         );

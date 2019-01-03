@@ -73,9 +73,11 @@ let radScale = d3.scaleSqrt()
 
 let colScale
 
+let dataScProm;
+
 
 async function drawAnimScatter() {
-  let dataScProm = await d3.csv('ScatterPlotInds.csv');
+  dataScProm = await d3.csv('ScatterPlotInds.csv');
   conIndNum(dataScProm);
 
   let keys = Object.keys(dataScProm[0]);
@@ -83,7 +85,7 @@ async function drawAnimScatter() {
   keys.pop();
   let randKeys = shuffle(keys).slice(0,3)
   console.log(randKeys);
-  drawScatterPlot(dataScProm, randKeys, true);
+  drawScatterPlot(dataScProm, ['Experienced physical or sexual spousal violence', 'Sought help post-violence', 'Experienced physical or sexual violence by other family members'], true);
 
 
   d3.select('#buttonHolder button').on('click', async function(){
