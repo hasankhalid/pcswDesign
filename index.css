@@ -25,6 +25,16 @@ html, body {
   z-index: 1;
 }
 
+.indicatorType {
+  font-size: 18px;
+  color: white;
+  font-weight: 300;
+}
+
+#scatterDivisions {
+  margin-bottom: 0px;
+}
+
 .aboutProject {
   cursor: pointer;
   z-index: 3;
@@ -387,5 +397,23 @@ svg circle { mix-blend-mode: screen; }
   }
   .socIcons {
     font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .axis text{
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .axis text{
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  .container {
+      max-width: 1440px !important;
   }
 }

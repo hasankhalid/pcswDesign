@@ -107,6 +107,7 @@
               <div class="panelContainer">
                 <div id="threeInputsContain">
                   <p class="subSectionHeading">Select Indicators</p>
+                  <p class="indicatorType">X-Axis Indicator</p>
                   <div class="input">
                     <select id="threeIndOne">
                       <option value="volvo">Volvo</option>
@@ -115,6 +116,7 @@
                       <option value="audi">Audi</option>
                     </select>
                   </div>
+                  <p class="indicatorType">Y-Axis Indicator</p>
                   <div class="input">
                     <select id="threeIndTwo">
                       <option value="volvo">Volvo</option>
@@ -123,6 +125,7 @@
                       <option value="audi">Audi</option>
                     </select>
                   </div>
+                  <p class="indicatorType">Circle Size Indicator</p>
                   <div class="input">
                     <select id="threeIndThree">
                       <option value="volvo">Volvo</option>
@@ -133,13 +136,7 @@
                   </div>
                 </div>
                 <div id="selectedIndicators">
-                  <p class="subSectionHeading">Showing All Divisions</p>
-                  <p class="subSectionHeading">Selected Indicators</p>
-                  <ul class="selectedIndicatorList">
-                    <li data-indicatorId="threeIndOne" class="sectiondescriptionList">Indicator One</li>
-                    <li data-indicatorId="threeIndTwo" class="sectiondescriptionList">Indicator One</li>
-                    <li data-indicatorId="threeIndThree" class="sectiondescriptionList">Indicator One</li>
-                  </ul>
+                  <p id="scatterDivisions" class="subSectionHeading">Showing All Divisions</p>
                 </div>
               </div>
             </div>
@@ -162,6 +159,7 @@
             <div class="panelContainer">
               <div id="thwoInputsContain">
                 <p class="subSectionHeading">Select Indicators</p>
+                <p class="indicatorType">Radius Indicator</p>
                 <div class="input">
                   <select id="twoIndOne">
                     <option value="volvo">Volvo</option>
@@ -173,6 +171,7 @@
                 <div style="width: 100%; margin-bottom: 20px;">
                   <input type="text" id="indOneMinMax" name="indicatorOne_range" value="" />
                 </div>
+                <p class="indicatorType">Color Indicator</p>
                 <div class="input">
                   <select id="twoIndTwo">
                     <option value="volvo">Volvo</option>
@@ -182,15 +181,8 @@
                   </select>
                 </div>
                 <div style="width: 100%;  margin-bottom: 20px;">
-                  <input data-ind-id="twoIndOne" type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
+                  <input type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
                 </div>
-              </div>
-              <div id="mapSelectedIndicators">
-                <p class="subSectionHeading">Selected Indicators</p>
-                <ul class="selectedIndicatorList">
-                  <li data-indicatorID="twoIndOne" class="sectiondescriptionList">Indicator One</li>
-                  <li data-indicatorID="twoIndTwo" class="sectiondescriptionList">Indicator One</li>
-                </ul>
               </div>
             </div>
           </div>
@@ -350,21 +342,13 @@
             var sIndicator = $('#threeIndThree').val();
 
             var reShufArr = [xIndicator, yIndicator, sIndicator];
-
-            console.log(reShufArr);
-
-            $('[data-indicatorId=threeIndOne]').text('X-Axis Indicator : ' + xIndicator);
-            $('[data-indicatorId=threeIndTwo]').text('Y-Axis Indicator : ' + yIndicator);
-            $('[data-indicatorId=threeIndThree]').text('Circle size Indicator : ' + sIndicator);
-
-            transScatterPlot(dataScProm, 2000, reShufArr, true)
+            transScatterPlot(dataScProm, 1500, reShufArr, true)
+            drawCircVoronoi(d3.select('svg').select('g'), dataScProm, reShufArr, 30);
 
           },
           defaultScatterIndicators,
           function(e){
-            $('[data-indicatorId=threeIndOne]').text('X-Axis Indicator : ' + defaultScatterIndicators[0]);
-            $('[data-indicatorId=threeIndTwo]').text('Y-Axis Indicator : ' + defaultScatterIndicators[1]);
-            $('[data-indicatorId=threeIndThree]').text('Circle size Indicator : ' + defaultScatterIndicators[2]);
+            $('#scatterDivisions').text('Showing All Divisions');
           }
         );
 
@@ -375,9 +359,6 @@
           function(e){
             var rIndicator = $('#twoIndOne').val();
             var cIndicator = $('#twoIndTwo').val();
-
-            $('[data-indicatorId=twoIndOne]').text('Radius Indicator : ' + rIndicator);
-            $('[data-indicatorId=twoIndTwo]').text('Color Indicator : ' + cIndicator);
 
             var minR = Math.floor(bubbleMap.getMinIndVal(rIndicator));
             var maxR = Math.ceil(bubbleMap.getMaxIndVal(rIndicator));
@@ -404,9 +385,6 @@
           },
           defaultMapIndicators,
           function(e){
-            $('[data-indicatorId=twoIndOne]').text('Radius Indicator : ' + defaultMapIndicators[0]);
-            $('[data-indicatorId=twoIndTwo]').text('Color Indicator : ' + defaultMapIndicators[1]);
-
             var minR = Math.floor(bubbleMap.getMinIndVal(defaultMapIndicators[0]));
             var maxR = Math.ceil(bubbleMap.getMaxIndVal(defaultMapIndicators[0]));
             rFilter.update({
@@ -434,20 +412,30 @@
           return !excludeObj[d];
         });
 
-        options = options.map((d)=>{return {text : d, value : d};});
-        console.log(options);
+        /*options = options.map((d)=>{return {name : d, text : d, value : d, disable : false};});*/
 
         selectors.forEach(function(d,i){
           var el = $(d);
 
           el.attr('data-group', groupName);
 
+          var elOptions = options.map(
+              function(o){
+                if(defaultVals.includes(o) && o !== defaultVals[i]){
+                  return {name : o, text : o, value : o, disable : true};
+                }else{
+                  return {name : o, text : o, value : o, disable : false};
+                }
+              }
+            );
           el.selectize({
             sortField : 'text',
-            options : options
+            options : elOptions,
+            disabledField: 'disable'
           });
 
           el[0].selectize.setValue(defaultVals[i], true);
+
           el.on('change', function(e){
 
             var selected = e.target.value;
@@ -456,6 +444,16 @@
               return;
             }
 
+            var selectGroup = Array.from(document.querySelectorAll(`[data-group=${groupName}]`));
+
+            selectGroup = selectGroup.filter((d)=>d !== this);
+
+            selectGroup.forEach((e)=>{
+              Object.keys(e.selectize.options).forEach((d)=>{
+                var disable = d === selected;
+                e.selectize.updateOption(d,{disable : disable, value : d, name : d, text : d});
+              });
+            });
             cb(e);
           });
 
