@@ -342,10 +342,7 @@
             var sIndicator = $('#threeIndThree').val();
 
             var reShufArr = [xIndicator, yIndicator, sIndicator];
-
-            console.log(reShufArr);
-
-            transScatterPlot(dataScProm, 2000, reShufArr, true)
+            transScatterPlot(dataScProm, 1500, reShufArr, true)
             drawCircVoronoi(d3.select('svg').select('g'), dataScProm, reShufArr, 30);
 
           },

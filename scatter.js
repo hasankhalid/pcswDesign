@@ -411,7 +411,7 @@ function drawCircVoronoi(selection, data, indArray, circCatchRad){
      //Make the radius a lot bigger
      .attr("r", circCatchRad)
      .style("fill", "grey")
-     .style("opacity", 0.0)
+     .style("fill-opacity", 0.0)
      .style("pointer-events", "all")
      //Notice that we now have the mousover events on these circles
      .on("mouseover", Hover(true))
