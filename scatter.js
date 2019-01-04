@@ -140,8 +140,11 @@ function drawScatterPlot(data, indArray, scale){
   // setting up the SVG
   let SVG = d3.select('#scatterContain')
     .append('svg')
-    .attr('height', heightSVG)
-    .attr('width', widthSVG);
+    .attr('viewBox', "0 0 " + widthSVG + " " + heightSVG)
+    .attr("preserveAspectRatio", "xMinYMin meet")
+
+    //.attr('height', heightSVG)
+    //.attr('width', widthSVG);
 
   console.log(computeExtents(data, indArray));
 
