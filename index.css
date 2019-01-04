@@ -25,6 +25,16 @@ html, body {
   z-index: 1;
 }
 
+.indicatorType {
+  font-size: 18px;
+  color: white;
+  font-weight: 300;
+}
+
+#scatterDivisions {
+  margin-bottom: 0px;
+}
+
 .aboutProject {
   cursor: pointer;
   z-index: 3;
