@@ -331,11 +331,11 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 			tooltip.append('div')
 					.classed('c-tooltip-header', true)
-					.html(`<h1>District : ${d.District}</h1>`);
+					.html(`<h1 style="margin-bottom: 5px; margin-top: 5px;">District : ${d.District}</h1>`);
 
 			tooltip.append('div')
 					.classed('c-tooltip-body', true)
-					.html(`<div>${currentIdicators.rIndicator} : ${d[currentIdicators.rIndicator]}</div><div>${currentIdicators.cIndicator} : ${d[currentIdicators.cIndicator]}</div>`);
+					.html(`<div style="font-weight: 600">${currentIdicators.rIndicator}: ${d[currentIdicators.rIndicator]}</div><div style="font-weight: 600">${currentIdicators.cIndicator}: ${d[currentIdicators.cIndicator]}</div>`);
 
 			var finalPos = getToolTipPosition(event, tooltip.node());
 

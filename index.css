@@ -108,6 +108,14 @@ html, body {
   color: white;
 }
 
+.overlayTitle {
+  font-size: 24px;
+}
+
+.aboutProjText {
+  color: #EEEEEE;
+}
+
 .boldTitle {
   font-weight: 400;
 }
@@ -297,11 +305,12 @@ svg circle { mix-blend-mode: screen; }
   display: flex;
   position: fixed;
   flex-direction: column;
-  width: 220px;
-  background-color: rgba(238, 238, 238, 0.6);
+  width: 230px;
+  background-color: rgba(238, 238, 238, 0.8);
   padding: 10px;
   border-radius: 8px;
   font-size: 17px;
+  z-index: 100;
 }
 
 .c-tooltip-header {
@@ -317,6 +326,37 @@ svg circle { mix-blend-mode: screen; }
 .c-tooltip-header h1 {
   font-size: 18px;
     font-weight: 500;
+}
+
+.tooltipValContainer {
+  display: flex;
+}
+
+.indTitle {
+  width: 82%;
+  margin-bottom: 1px;
+  font-weight: 600;
+  color: #424242;
+}
+
+.indVal {
+  width: 18%;
+  text-align: right;
+  margin-bottom: 1px;
+  font-weight: 600;
+  color: #424242;
+}
+
+.indHead {
+  border-bottom: 1px solid;
+  padding-bottom: 4px;
+  font-weight: 600;
+}
+
+.valHead {
+  border-bottom: 1px solid;
+  padding-bottom: 4px;
+  font-weight: 600;
 }
 
 .c-tooltip-body div {
@@ -351,6 +391,12 @@ svg circle { mix-blend-mode: screen; }
   .landTitle {
     font-size: 22px;
   }
+  .overlayTitle {
+    font-size: 18px;
+  }
+  .aboutProjText {
+    font-size: 14px;
+  }
   .headsub {
     font-size: 14px;
     margin-bottom: 5px;
@@ -376,17 +422,26 @@ svg circle { mix-blend-mode: screen; }
   .landTitle {
     font-size: 26px;
   }
+  .overlayTitle {
+    font-size: 20px;
+  }
 }
 
 @media only screen and (max-width: 1090px) {
   .landTitle {
     font-size: 24px;
   }
+  .overlayTitle {
+    font-size: 18px;
+  }
 }
 
 @media only screen and (max-width: 445px) {
   .landTitle {
     font-size: 20px;
+  }
+  .overlayTitle {
+    font-size: 16px;
   }
   .headsub {
     font-size: 12px;

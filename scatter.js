@@ -83,8 +83,6 @@ async function drawAnimScatter() {
   let keys = Object.keys(dataScProm[0]);
   keys.shift();
   keys.pop();
-  let randKeys = shuffle(keys).slice(0,3)
-  console.log(randKeys);
   drawScatterPlot(dataScProm, ['Experienced physical or sexual spousal violence', 'Sought help post-violence', 'Experienced physical or sexual violence by other family members'], true);
 
 
@@ -421,6 +419,80 @@ function drawCircVoronoi(selection, data, indArray, circCatchRad){
      .on("mouseout",  Hover(false));
 }
 
+
+	function getToolTipPosition(event, tooltip){
+		var x = event.clientX,
+			y = event.clientY,
+			windowWidth = window.innerWidth,
+			windowHeight = window.innerHeight,
+			elemWidth = tooltip.offsetWidth,
+			elemHeight = tooltip.offsetHeight,
+			offset = 20;
+
+		var finalX, finalY;
+
+		if(x + elemWidth  + offset < windowWidth){
+			finalX = x + offset;
+		}else{
+			finalX = x - elemWidth - offset;
+		}
+
+		if(y + elemHeight  + offset < windowHeight){
+			finalY = y + offset;
+		}else{
+			finalY = y - elemHeight - offset;
+		}
+
+		return [finalX, finalY];
+	}
+
+  function createTooltip(d, event){
+		window.ev = event;
+		var tooltipElement = document.getElementById('circles-tooltip' + d.id);
+
+		if(!tooltipElement){
+			var tooltip = d3.select('body')
+				.append('div')
+					.attr('id', 'circles-tooltip' + d.id)
+					.classed('c-tooltip', true)
+					.style('opacity', 0);
+
+			tooltip.append('div')
+					.classed('c-tooltip-header', true)
+					.html(`<h1 style="margin-bottom: 5px; margin-top: 5px;">District : ${d.District}</h1>`);
+
+			tooltip.append('div')
+					.classed('c-tooltip-body', true)
+					.html(`<div class="tooltipValContainer"><p class="indTitle indHead">Indicator</p><p class="indVal valHead">Value</p></div><div class="tooltipValContainer"><p class="indTitle">${$('#threeIndOne').val()}</p><p class="indVal">${d[$('#threeIndOne').val()]}</p></div><div class="tooltipValContainer"><p class="indTitle">${$('#threeIndTwo').val()}</p><p class="indVal">${d[$('#threeIndTwo').val()]}</p></div><div class="tooltipValContainer"><p class="indTitle">${$('#threeIndThree').val()}</p><p class="indVal">${d[$('#threeIndThree').val()]}</p></div>`);
+
+			var finalPos = getToolTipPosition(event, tooltip.node());
+
+			tooltip.style('left', finalPos[0] + 'px')
+					.style('top', finalPos[1] + 'px');
+
+			tooltip.transition()
+					.duration(300)
+					.style('opacity', 1);
+		}else{
+			var finalPos = getToolTipPosition(event, tooltipElement);
+
+			tooltipElement.style.left = finalPos[0] + 'px';
+			tooltipElement.style.top = finalPos[1] + 'px';
+		}
+	}
+
+  function removeTooltip(d){
+    var tooltip = document.getElementById('circles-tooltip' + d.id);
+
+    if(tooltip){
+      d3.select(tooltip)
+        .transition()
+        .duration(100)
+        .style('opacity', 0)
+        .remove();
+    }
+  }
+
 function Hover(over){
   return function(d, i){
     // getting the class and then the district
@@ -437,8 +509,12 @@ function Hover(over){
 
     // add titles for districts
     d3.select(this)
-      .call(addRemTitle);
-
+      .on('mouseout', function(d){
+        removeTooltip(d);
+      })
+      .on('mousemove', function(d){
+        createTooltip(d, d3.event);
+      })
     // selecting inactive elements
     d3.selectAll(`circle.dataEnc:not(.${distSelect})`)
       .transition()
@@ -471,7 +547,6 @@ function Hover(over){
     }
 
     function addRemTitle(selection){
-      console.log(selection);
       if (over) {
         selection.append('title')
           .style('fill', 'white')
