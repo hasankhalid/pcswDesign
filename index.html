@@ -160,39 +160,51 @@
             <div class="panelContainer">
               <div id="thwoInputsContain">
                 <p class="subSectionHeading">Select Indicators</p>
-                <p class="indicatorType">Radius Indicator</p>
-                <div class="input">
-                  <select id="twoIndOne">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                  </select>
+                <div class="input-legend-container">
+                  <div class="input-legend-container__legend">
+                    <div class="r-legend">
+                    </div>
+                  </div>
+                  <div class="input-legend-container__input">
+                    <p class="indicatorType">Radius Indicator</p>
+                    <div class="input">
+                      <select id="twoIndOne">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                    </div>
+                    <div style="width: 100%; margin-bottom: 20px;">
+                      <input type="text" id="indOneMinMax" name="indicatorOne_range" value="" />
+                    </div>
+                  </div>
                 </div>
-                <div style="width: 100%; margin-bottom: 20px;">
-                  <input type="text" id="indOneMinMax" name="indicatorOne_range" value="" />
-                </div>
-                <p class="indicatorType">Color Indicator</p>
-                <div class="input">
-                  <select id="twoIndTwo">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-                <div style="width: 100%;  margin-bottom: 20px;">
-                  <input type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
+                <div class="input-legend-container">
+                  <div class="input-legend-container__legend">
+                    <div class="c-legend">
+                    </div>
+                  </div>
+                  <div class="input-legend-container__input">
+                    <p class="indicatorType">Color Indicator</p>
+                    <div class="input">
+                      <select id="twoIndTwo">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                    </div>
+                    <div style="width: 100%;  margin-bottom: 20px;">
+                      <input type="text" id="indTwoMinMax" name="indicatorTwo_range" value="" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-sm-12 col-md-12 col-lg-9 col-xl-8 order-xl-1 order-lg-1">
             <div id="mapContain">
-              <div class="r-legend">
-              </div>
-              <div class="c-legend">
-              </div>
               <svg>
               </svg>
             </div>
@@ -293,7 +305,7 @@
   		.then((data)=>{
         mapData = data[0];
 
-  			bubbleMap = getBubbleMapCreator(data[0], data[1], data[2],'#mapContain svg', '#mapContain .r-legend', '#mapContain .c-legend');
+  			bubbleMap = getBubbleMapCreator(data[0], data[1], data[2],'#mapContain svg', '.r-legend', '.c-legend');
   			bubbleMap.createMap(defaultMapIndicators[0], defaultMapIndicators[1]);
 
         $("#indOneMinMax").ionRangeSlider({
