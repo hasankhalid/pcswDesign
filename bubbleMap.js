@@ -393,14 +393,9 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 	function createConcentricCircleLegend(selector, intervalArr, valArr){
 		var legendSVG = d3.select(selector)
-			.style('position', 'absolute')
-			.style('bottom', '60px')
-			.style('right', '225px')
 			.append('svg')
-			.attr('width', 140)
-			.attr('height', 70)
-			.attr('viewBox', '-52 -42 140 70')
-			.attr("preserveAspectRatio", "xMinYMin meet")
+			.attr('viewBox', '-25 -42 110 70')
+			.attr("preserveAspectRatio", "xMinYMid meet")
 			.style('fill', '#fff');
 
 		var rScale = d3.scaleSqrt().domain([0,100]).range([0,22]);
@@ -437,13 +432,8 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 
 	function createColorLegend(selector, intervalArr, valArr){
 		var legendSVG = d3.select(selector)
-			.style('position', 'absolute')
-			.style('bottom', '60px')
-			.style('right', '5px')
 			.append('svg')
-			.attr('viewBox', '0 0 200 200')
-			.attr('width', 200)
-			.attr('height', 200)
+			.attr('viewBox', '0 0 100 100')
 			.style('fill', '#fff');
 
 		gradient = legendSVG.append('defs')
@@ -463,16 +453,16 @@ function getBubbleMapCreator(csvData, outerGJ,innerGJ,svgSelector, rLegendSelect
 			.style('stop-opacity', 1);
 
 		legendSVG.append('rect')
-			.attr('width',50)
-			.attr('height',200)
+			.attr('width',30)
+			.attr('height',100)
 			.attr('fill', 'url(#legendGrad)');
 
 		legendSVG.selectAll('text')
 			.data(valArr)
 			.enter()
 			.append('text')
-			.attr('x',60)
-			.attr('y', (d,i)=>Math.floor(i/(valArr.length - 1) * 200))
+			.attr('x',40)
+			.attr('y', (d,i)=>Math.floor(i/(valArr.length - 1) * 100))
 			.attr('dy', (d,i)=>getColorLegendDY(i, valArr.length))
 			.style('dominant-baseline', 'middle')
 			.text((d)=>d);
