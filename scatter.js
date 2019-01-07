@@ -416,7 +416,14 @@ function drawCircVoronoi(selection, data, indArray, circCatchRad){
      .style("pointer-events", "all")
      //Notice that we now have the mousover events on these circles
      .on("mouseover", Hover(true))
-     .on("mouseout",  Hover(false));
+     .on('mousemove', function(d){
+          createTooltip(d, d3.event);
+      })
+     .on("mouseout", function(d,i){
+       Hover(false).apply(this,[d,i]);
+       removeTooltip(d);
+     })
+     //.on("mouseout", function(){console.log('abc')})
 }
 
 
@@ -508,13 +515,13 @@ function Hover(over){
       .style('fill-opacity', over ? 1 : 0.65)
 
     // add titles for districts
-    d3.select(this)
-      .on('mouseout', function(d){
-        removeTooltip(d);
-      })
-      .on('mousemove', function(d){
-        createTooltip(d, d3.event);
-      })
+    // d3.select(this)
+    //   .on('mouseout', function(d){
+    //     removeTooltip(d);
+    //   })
+    //   .on('mousemove', function(d){
+    //     createTooltip(d, d3.event);
+    //   })
     // selecting inactive elements
     d3.selectAll(`circle.dataEnc:not(.${distSelect})`)
       .transition()
